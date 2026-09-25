@@ -136,6 +136,21 @@ footer{text-align:center;color:#9ca3af;font-size:11px;padding-top:24px}
   .mobile-pdf-note{display:block}
 }
 
+
+.direct-links{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 8px}
+.pdf-tab-link{
+  display:block;text-align:center;text-decoration:none;border-radius:12px;padding:13px 10px;
+  font-size:14px;font-weight:850;border:1px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,.04);transition:.15s ease;
+}
+.pdf-tab-link:hover{transform:translateY(-1px);box-shadow:0 5px 14px rgba(0,0,0,.08)}
+.pdf-tab-link.e{background:var(--e-bg);color:var(--e-text)}
+.pdf-tab-link.n{background:var(--n-bg);color:var(--n-text)}
+.pdf-tab-link.w{background:var(--w-bg);color:var(--w-text)}
+.docs-hint{font-size:12px;color:var(--muted);margin:4px 2px 0;line-height:1.5}
+.pdf-toolbar,.pdf-frame-wrap,.mobile-pdf-note{display:none!important}
+@media(max-width:700px){.direct-links{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -190,24 +205,12 @@ footer{text-align:center;color:#9ca3af;font-size:11px;padding-top:24px}
       <img class="stadium-map" src="stadium-map.png" alt="목동종합운동장 기본도면">
     </div>
 
-    <div class="pdf-tabs" role="tablist" aria-label="구역별 자료">
-      <button class="pdf-tab active" data-pdf="E-zone.pdf" data-label="E구역">E구역</button>
-      <button class="pdf-tab" data-pdf="N-zone.pdf" data-label="N구역">N구역</button>
-      <button class="pdf-tab" data-pdf="W-zone.pdf" data-label="W구역">W구역</button>
+    <div class="pdf-tabs direct-links" aria-label="구역별 자료">
+      <a class="pdf-tab-link e" href="E-zone.pdf" target="_blank" rel="noopener">E구역 자료</a>
+      <a class="pdf-tab-link n" href="N-zone.pdf" target="_blank" rel="noopener">N구역 자료</a>
+      <a class="pdf-tab-link w" href="W-zone.pdf" target="_blank" rel="noopener">W구역 자료</a>
     </div>
-
-    <div class="pdf-toolbar">
-      <div id="pdfTitle" class="pdf-title">E구역 배치자료</div>
-      <a id="pdfOpen" class="pdf-open" href="E-zone.pdf" target="_blank" rel="noopener">새 창에서 열기</a>
-    </div>
-
-    <div class="pdf-frame-wrap">
-      <iframe id="pdfFrame" class="pdf-frame" src="E-zone.pdf#view=FitH" title="구역별 배치자료"></iframe>
-    </div>
-
-    <div class="mobile-pdf-note">
-      휴대폰에서 PDF가 바로 보이지 않으면 <b>새 창에서 열기</b>를 눌러주세요.
-    </div>
+    <div class="docs-hint">구역 버튼을 누르면 해당 자료가 새 창에서 바로 열립니다.</div>
   </div>
 </section>
 </main>
@@ -337,17 +340,7 @@ document.querySelectorAll('.side-btn').forEach(btn => {
 });
 
 
-document.querySelectorAll('.pdf-tab').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.pdf-tab').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const pdf = btn.dataset.pdf;
-    const label = btn.dataset.label;
-    document.getElementById('pdfFrame').src = pdf + '#view=FitH';
-    document.getElementById('pdfOpen').href = pdf;
-    document.getElementById('pdfTitle').textContent = label + ' 배치자료';
-  });
-});
+
 
 </script>
 </body>
